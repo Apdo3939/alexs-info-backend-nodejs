@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const HomeModel = require('./models/HomeModel');
+
 app.get('/', function (req, res) {
     res.send('Hello World!!!');
 });
