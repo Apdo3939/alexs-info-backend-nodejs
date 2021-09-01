@@ -9,6 +9,11 @@ const HomeModel = db.define('homes', {
         primaryKey: true
     },
 
+    image_top: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
     title_top_one: {
         type: Sequelize.STRING,
         allowNull: false
@@ -158,5 +163,6 @@ const HomeModel = db.define('homes', {
 });
 
 //HomeModel.sync();
+//HomeModel.sync({ alter: true })
 
 module.exports = HomeModel;
