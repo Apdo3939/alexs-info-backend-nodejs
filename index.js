@@ -50,15 +50,31 @@ app.post('/create', async (req, res) => {
                 message: 'Erro: Não cadastrado!'
             });
         });
-
-    res.send('Hello World!!!');
 });
 
 app.post('/contact', async (req, res) => {
-    return res.json({
-        error: false,
-        message: 'Orçamento realizado com sucesso!'
-    });
+
+    function sleep(ms) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        });
+    }
+
+    await sleep(2000);
+
+    await BudgetModel.create(req.body)
+        .then(() => {
+            return res.json({
+                error: false,
+                message: 'Orçamento realizado com sucesso!'
+            });
+        })
+        .catch(() => {
+            return res.status(400).json({
+                error: true,
+                message: 'Erro: Orçamento não realizado!'
+            });
+        });
 });
 
 app.listen(8081, () => {
