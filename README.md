@@ -24,3 +24,7 @@ Instalar o sequelize, orm para javascript
 Instalar o drive para o uso do mysql
 
 ## npm install --save mysql2
+
+Instalar o cors para liberar acesso do api com o frontend
+
+## npm install cors
