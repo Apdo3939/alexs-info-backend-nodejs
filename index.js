@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const path = require('path');
 
 const HomeModel = require('./models/HomeModel');
+const BudgetModel = require('./models/BudgetModel');
 
 app.use(express.json());
+app.use('/files', express.static(path.resolve(__dirname, 'public', 'upload')));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -21,6 +24,7 @@ app.get('/', async (req, res) => {
             return res.json({
                 error: false,
                 data,
+                url: 'http://localhost:8081/files/home/',
                 message: 'Arquivo encontrado!'
             });
         })
@@ -48,6 +52,13 @@ app.post('/create', async (req, res) => {
         });
 
     res.send('Hello World!!!');
+});
+
+app.post('/contact', async (req, res) => {
+    return res.json({
+        error: false,
+        message: 'Orçamento realizado com sucesso!'
+    });
 });
 
 app.listen(8081, () => {
