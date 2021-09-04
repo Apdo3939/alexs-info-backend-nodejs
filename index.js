@@ -36,6 +36,44 @@ app.get('/', async (req, res) => {
         });
 });
 
+app.get('/list', async (req, res) => {
+    await BudgetModel.findAll({
+        attributes: ['id', 'name', 'subject'],
+        order: [['id', 'DESC']]
+    })
+        .then((budget) => {
+            return res.json({
+                error: false,
+                budget
+            });
+        })
+        .catch(() => {
+            return res.status(400).json({
+                error: true,
+                message: 'Erro: Nenhum orçamento encontrado!'
+            });
+        });
+
+});
+
+app.get('/budget/:id', async (req, res) => {
+
+    const { id } = req.params;
+    await BudgetModel.findByPk(id)
+        .then((budget) => {
+            return res.json({
+                error: false,
+                budget
+            });
+        })
+        .catch(() => {
+            return res.status(400).json({
+                error: true,
+                message: 'Erro: Nenhum orçamento encontrado!'
+            });
+        });
+});
+
 app.post('/create', async (req, res) => {
     await HomeModel.create(req.body)
         .then(() => {
